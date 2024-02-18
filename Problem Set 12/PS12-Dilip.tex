@@ -1,0 +1,933 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={PS12},
+  pdfauthor={Dilip Nikhil Francies},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{PS12}
+\author{Dilip Nikhil Francies}
+\date{2023-12-07}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/dilip/OneDrive - Indiana University/Stats/PS12"
+\end{verbatim}
+
+\hypertarget{question-1-brother-vs-sister}{%
+\subsubsection{Question 1: Brother vs
+Sister}\label{question-1-brother-vs-sister}}
+
+Lets read the data as vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sister }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{69}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{63}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{62}\NormalTok{)}
+\NormalTok{brother }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{71}\NormalTok{, }\DecValTok{68}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{71}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{72}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{66}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{question-1a-sample-coeffecient-of-determination-rsquared}{%
+\subsubsection{Question 1a: Sample Coeffecient of Determination :
+Rsquared}\label{question-1a-sample-coeffecient-of-determination-rsquared}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lin\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(brother }\SpecialCharTok{\textasciitilde{}}\NormalTok{ sister)}
+\NormalTok{rSquared }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(lin\_model)}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{rSquared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3114251
+\end{verbatim}
+
+\hypertarget{question-1b}{%
+\subsubsection{Question 1b:}\label{question-1b}}
+
+alpha = 0.05
+
+Lets find the p-value for the hypothesis that the slope in the linear
+regression model is 0, and the alternate hypothesis that it is not.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lin\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = brother ~ sister)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5909 -1.2273 -0.9545  1.1136  4.0000 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)  31.1818    18.7584   1.662   0.1308  
+## sister        0.5909     0.2929   2.018   0.0744 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.379 on 9 degrees of freedom
+## Multiple R-squared:  0.3114, Adjusted R-squared:  0.2349 
+## F-statistic:  4.07 on 1 and 9 DF,  p-value: 0.07442
+\end{verbatim}
+
+With the p-value of around 0.07442, we can safely conclude that the data
+is compatible with the null hypothesis that knowing sisters height is
+not enough to predict brothers height.
+
+\hypertarget{question-1c}{%
+\subsubsection{Question 1c:}\label{question-1c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Confidence interval for the slope}
+\NormalTok{conf\_interval }\OtherTok{\textless{}{-}} \FunctionTok{confint}\NormalTok{(lin\_model, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
+\NormalTok{conf\_interval}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     5 %      95 %
+## (Intercept) -3.20446954 65.568106
+## sister       0.05401643  1.127802
+\end{verbatim}
+
+The 90\% confidence interval for the slope is 0.054 to 1.127.
+
+\hypertarget{question-2-anxiety-and-exams}{%
+\subsubsection{Question 2: Anxiety and
+Exams}\label{question-2-anxiety-and-exams}}
+
+Read the given data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exam\_anxiety }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"examanxiety.txt"}\NormalTok{,}\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(exam\_anxiety,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Code Revise Exam Anxiety Gender
+## 1    1      4   40  86.298   Male
+## 2    2     11   65  88.716 Female
+\end{verbatim}
+
+Split the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anxiety\_male }\OtherTok{\textless{}{-}}\NormalTok{ exam\_anxiety}\SpecialCharTok{$}\NormalTok{Anxiety[exam\_anxiety}\SpecialCharTok{$}\NormalTok{Gender }\SpecialCharTok{==}\StringTok{"Male"}\NormalTok{]}
+\NormalTok{anxiety\_feamale }\OtherTok{\textless{}{-}}\NormalTok{ exam\_anxiety}\SpecialCharTok{$}\NormalTok{Anxiety[exam\_anxiety}\SpecialCharTok{$}\NormalTok{Gender }\SpecialCharTok{==}\StringTok{"Female"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{question-2a}{%
+\paragraph{Question 2a:}\label{question-2a}}
+
+Lets perform two sample test with the following hypothesis:
+
+Null : There is no mean difference in anxiety levels between males and
+females ie. muFemales = muMales Alternate hypotheses: There is
+difference betweeen anxiety levels between males and females ie
+muFemales != muMales
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(anxiety\_male,anxiety\_feamale,}\AttributeTok{var.equal =}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  anxiety_male and anxiety_feamale
+## t = -0.32961, df = 100.41, p-value = 0.7424
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -7.147444  5.110827
+## sample estimates:
+## mean of x mean of y 
+##  74.38373  75.40204
+\end{verbatim}
+
+From the above results, its clear that there is no difference as the
+p-value obtained is not tiny.
+
+\hypertarget{question-2b}{%
+\paragraph{Question 2b:}\label{question-2b}}
+
+Lets draw the scatter plot with the regression line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scatterplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(exam\_anxiety, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Anxiety, }\AttributeTok{y =}\NormalTok{ Exam)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Scatterplot}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add regression line}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Anxiety"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Exam score"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Scatterplot of Anxiety vs Exam score with Least Squares Regression Line"}\NormalTok{)}
+
+\CommentTok{\# Print the plot}
+\FunctionTok{print}\NormalTok{(scatterplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Exam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Anxiety, }\AttributeTok{data =}\NormalTok{ exam\_anxiety)}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Exam ~ Anxiety, data = exam_anxiety)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -49.185 -16.046   1.166  19.856  41.461 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 111.2444    11.3498   9.801 2.46e-16 ***
+## Anxiety      -0.7300     0.1484  -4.920 3.37e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23.41 on 101 degrees of freedom
+## Multiple R-squared:  0.1933, Adjusted R-squared:  0.1853 
+## F-statistic:  24.2 on 1 and 101 DF,  p-value: 3.374e-06
+\end{verbatim}
+
+From the results and the plot,it looks like there is a downward trend in
+the data, When the anxiety levels are higher, the marks tend to be all
+over the place.The regression model does a horrible job in in capturing
+the variance in the data set.Linear Regression may not be our best model
+in predicting the exam score based on anxiety levels.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(broom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'broom' was built under R version 4.2.3
+\end{verbatim}
+
+\hypertarget{question-2c}{%
+\paragraph{Question 2c:}\label{question-2c}}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  Linearity:
+\end{enumerate}
+
+Scatter plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my.lm.df }\OtherTok{\textless{}{-}} \FunctionTok{augment}\NormalTok{(model)}
+\FunctionTok{ggplot}\NormalTok{(my.lm.df, }\FunctionTok{aes}\NormalTok{(exam\_anxiety}\SpecialCharTok{$}\NormalTok{Anxiety, .resid)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+It is clear that there is no strong linear relationship between the two
+variables. There does seem to be a lot of outliers, and most of the data
+seems to be scattered on the right side of the plot with varying exam
+scores for a small range of anxiety levels.
+
+ii.Independence.
+
+Let's plot a residuals vs.~fitted values plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Exam }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Anxiety, }\AttributeTok{data =}\NormalTok{ exam\_anxiety)}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{fitted.values}\NormalTok{(model)}
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(model)}
+\FunctionTok{plot}\NormalTok{(fit, res, }\AttributeTok{main =} \StringTok{"Residuals vs Fitted"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Fitted values"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+Because the exam scores recorded are for different students, ideally the
+data set should be independent as long as there were no multiple
+measurements taken for the same students.
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Homoskedasticity:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(model, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{fitted}\NormalTok{(model), }\AttributeTok{y =} \FunctionTok{resid}\NormalTok{(model))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Fitted Values"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Fitted Values"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+Let's plot absolute residual plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aug\_model\_df }\OtherTok{\textless{}{-}} \FunctionTok{augment}\NormalTok{(model)}
+\FunctionTok{ggplot}\NormalTok{(aug\_model\_df, }\FunctionTok{aes}\NormalTok{(exam\_anxiety}\SpecialCharTok{$}\NormalTok{Anxiety, .resid)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-15-1.pdf}
+The residuals get smaller as we go right, and hence there is no constant
+spread. Homoskedasticity check fails.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuals\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Fitted\_Values =} \FunctionTok{fitted}\NormalTok{(model),}
+  \AttributeTok{Residuals =} \FunctionTok{residuals}\NormalTok{(model)}
+\NormalTok{)}
+
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(residuals\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Fitted\_Values, }\AttributeTok{y =}\NormalTok{ Residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Fitted Values with Observed Pattern"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Fitted Values"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-16-1.pdf}
+Normality of errors :
+
+lets feed the residual to a normal QQ plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(aug\_model\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ .resid)) }\SpecialCharTok{+} \FunctionTok{stat\_qq}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{stat\_qq\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+It definitely is not straight.At the tails it deviates significantly
+from the qqline. Hence, one could conclude that the residuals are barely
+normal.
+
+\hypertarget{question-3}{%
+\subsubsection{Question 3:}\label{question-3}}
+
+\hypertarget{question-3a}{%
+\paragraph{Question 3a:}\label{question-3a}}
+
+Assumption of ANOVA
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Observations are independent: Yes, Because the rats were randomly
+  divided into four groups and were put in a cage, to a certain extent
+  one could say this was a randomized control experiment. So the
+  observations are independent.
+\end{enumerate}
+
+2.All the populations are normal : From the given QQ plots, except at
+the tails, the observations does look like they fall on the straight
+line. But perhaps, if we had more sample we could have been sure of the
+normality. From the 35 observations for each group we have, we can
+assume that the population is normal.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Homoscedasticity:
+\end{enumerate}
+
+Apart from the fruit diet sample that has a standard deviation of 16.9,
+other sample's standard deviation are very close to each other. To a
+certain extent, one can conclude that the stds of all four samples
+(16.9, 14.6,14.2,14.1) are kinda close to each other. hence
+Homoskedasticity checks out.
+
+\hypertarget{question-3b}{%
+\paragraph{Question 3b:}\label{question-3b}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{140}
+\NormalTok{n}\OtherTok{\textless{}{-}} \DecValTok{35}
+
+\NormalTok{fruitMean }\OtherTok{\textless{}{-}} \FloatTok{83.5}
+\NormalTok{fruitSD }\OtherTok{\textless{}{-}} \FloatTok{16.9}
+\NormalTok{carbsMean }\OtherTok{\textless{}{-}} \FloatTok{92.3}
+\NormalTok{carbsSD }\OtherTok{\textless{}{-}} \FloatTok{14.6}
+\NormalTok{meatMean }\OtherTok{\textless{}{-}} \FloatTok{88.6}
+\NormalTok{meatSD }\OtherTok{\textless{}{-}} \FloatTok{14.2}
+\NormalTok{mixedMean }\OtherTok{\textless{}{-}} \FloatTok{99.4}
+\NormalTok{mixedSD }\OtherTok{\textless{}{-}} \FloatTok{14.1}
+
+
+\NormalTok{means }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(fruitMean,carbsMean,meatMean,mixedMean)}
+\NormalTok{SD }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(fruitSD,carbsSD,meatSD,mixedSD)}
+\NormalTok{grandMean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(means)}
+\NormalTok{SSB }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ (fruitMean}\SpecialCharTok{{-}}\NormalTok{grandMean)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ (carbsMean}\SpecialCharTok{{-}}\NormalTok{grandMean)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ (meatMean}\SpecialCharTok{{-}}\NormalTok{grandMean)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ (mixedMean}\SpecialCharTok{{-}}\NormalTok{grandMean)}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{betweenDF }\OtherTok{\textless{}{-}} \DecValTok{4{-}1}
+\NormalTok{between.meansquare }\OtherTok{\textless{}{-}}\NormalTok{ SSB}\SpecialCharTok{/}\NormalTok{betweenDF}
+\NormalTok{SSB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4698.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{betweenDF}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{between.meansquare}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1566.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ssw }\OtherTok{\textless{}{-}}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ fruitSD}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ carbsSD}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ meatSD}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (n}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ mixedSD}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{dfw }\OtherTok{\textless{}{-}}\NormalTok{ N}\DecValTok{{-}4} \CommentTok{\# 4 groups}
+\NormalTok{within.meansqaure }\OtherTok{\textless{}{-}}\NormalTok{ ssw}\SpecialCharTok{/}\NormalTok{dfw}
+\NormalTok{ssw}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30573.48
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{within.meansqaure}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 224.805
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfw}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 136
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{F }\OtherTok{\textless{}{-}}\NormalTok{ between.meansquare}\SpecialCharTok{/}\NormalTok{within.meansqaure}
+\NormalTok{F}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.967149
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pf}\NormalTok{(F, }\AttributeTok{df1 =}\NormalTok{ betweenDF, }\AttributeTok{df2 =}\NormalTok{ dfw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0002140835
+\end{verbatim}
+
+Hence, SSB = 4698.75, BDF = 3, between mean square = 1566.25
+
+SSW = 30573.48, within mean square = 224.805, WDF = 136
+
+F = 6.967149
+
+Total = 35272.23
+
+Total DF = 136 + 3 = 139
+
+p-value = 0.00021
+
+\hypertarget{question-3c}{%
+\paragraph{Question 3c:}\label{question-3c}}
+
+There is infact strong evidence against the null hypothesis with a
+p-value of 0.00021.Yes, our sample size is small. But to a certain
+extent we can conclude that there is significant difference in the means
+of the group which means one of the four groups has a significant
+difference in the amount of weight gained. Do we know which group? we
+don't. But with further analysis, one could find out the answer.
+
+\hypertarget{question-4-empathy-vs-game}{%
+\subsubsection{Question 4: Empathy vs
+Game}\label{question-4-empathy-vs-game}}
+
+\hypertarget{question-4a}{%
+\paragraph{Question 4a}\label{question-4a}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{game\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"GameEmpathy.txt"}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(game\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      sex game.type identify  empathy
+## 1 female   neutral 3.333333 5.285714
+## 2 female   neutral 1.833333 5.571429
+## 3   male   neutral 1.000000 4.714286
+## 4 female   neutral 1.000000 5.571429
+## 5 female   neutral 3.333333 3.142857
+## 6 female   neutral 1.000000 5.571429
+\end{verbatim}
+
+Visualization:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(empathy }\SpecialCharTok{\textasciitilde{}}\NormalTok{ game.type, }\AttributeTok{data =}\NormalTok{ game\_data, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Empathy for different types of Games"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GTA }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(game\_data, game.type }\SpecialCharTok{==} \StringTok{"GTA"}\NormalTok{)}
+\NormalTok{HalfLife }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(game\_data, game.type }\SpecialCharTok{==} \StringTok{"HalfLife"}\NormalTok{)}
+\NormalTok{neutral }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(game\_data, game.type }\SpecialCharTok{==} \StringTok{"neutral"}\NormalTok{)}
+
+\CommentTok{\#sample empthy observations for each games}
+\FunctionTok{mean}\NormalTok{(GTA}\SpecialCharTok{$}\NormalTok{empathy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.029762
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(HalfLife}\SpecialCharTok{$}\NormalTok{empathy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.293939
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(neutral}\SpecialCharTok{$}\NormalTok{empathy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.05381
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NROW}\NormalTok{(GTA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 48
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NROW}\NormalTok{(HalfLife)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 55
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{NROW}\NormalTok{(neutral)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50
+\end{verbatim}
+
+ANOVA test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova\_model }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(empathy }\SpecialCharTok{\textasciitilde{}}\NormalTok{ game.type, }\AttributeTok{data =}\NormalTok{ game\_data)}
+\FunctionTok{summary}\NormalTok{(anova\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Df Sum Sq Mean Sq F value Pr(>F)
+## game.type     2   2.25   1.125   1.092  0.338
+## Residuals   150 154.47   1.030
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{F }\OtherTok{\textless{}{-}} \FloatTok{1.092}
+\NormalTok{bdf }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{wdf }\OtherTok{\textless{}{-}} \DecValTok{150}
+\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pf}\NormalTok{(F, }\AttributeTok{df1 =}\NormalTok{ bdf, }\AttributeTok{df2 =}\NormalTok{ wdf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.338197
+\end{verbatim}
+
+Because we dont have a tiny p-value (0.05), we can conclude that indeed
+the null hypotheses is true, there is no significant difference in the
+means between the three samples.
+
+\hypertarget{question-4b}{%
+\paragraph{Question 4b:}\label{question-4b}}
+
+To understand the relationship between identification and empathy among
+gamers who played different games, lets find the correlation and
+visualize scatterplots.
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  Student who played neutral games:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(neutral}\SpecialCharTok{$}\NormalTok{identify, neutral}\SpecialCharTok{$}\NormalTok{empathy,}
+     \AttributeTok{xlab =} \StringTok{"Identification"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Empathy"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Identification vs Empathy for (Neutral Gamers)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-28-1.pdf}
+Correlation :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate correlation coefficient}
+\NormalTok{corr\_neutral }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(neutral}\SpecialCharTok{$}\NormalTok{identify, neutral}\SpecialCharTok{$}\NormalTok{empathy)}
+\NormalTok{corr\_neutral}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08991878
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calculate the p{-}value}
+\NormalTok{cor\_test\_neutral }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(neutral}\SpecialCharTok{$}\NormalTok{identify, neutral}\SpecialCharTok{$}\NormalTok{empathy, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\NormalTok{p\_value\_neutral }\OtherTok{\textless{}{-}}\NormalTok{ cor\_test\_neutral}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{p\_value\_neutral}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5345996
+\end{verbatim}
+
+A small positive correlation between identification and empathy of 0.089
+is observed in neutral players
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Half Life:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(HalfLife}\SpecialCharTok{$}\NormalTok{identify, HalfLife}\SpecialCharTok{$}\NormalTok{empathy,}
+     \AttributeTok{xlab =} \StringTok{"Identification"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Empathy"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Identification vs Empathy (HalfLife)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{corr\_HalfLife}\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(HalfLife}\SpecialCharTok{$}\NormalTok{identify, HalfLife}\SpecialCharTok{$}\NormalTok{empathy, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\NormalTok{corr\_HalfLife}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.07164441
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calculate the p{-}value}
+\NormalTok{cor\_test\_HalfLife }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(HalfLife}\SpecialCharTok{$}\NormalTok{identify, HalfLife}\SpecialCharTok{$}\NormalTok{empathy, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\NormalTok{p\_value\_HalfLife }\OtherTok{\textless{}{-}}\NormalTok{ cor\_test\_HalfLife}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{p\_value\_HalfLife}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6032072
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  GTA:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(GTA}\SpecialCharTok{$}\NormalTok{identify, GTA}\SpecialCharTok{$}\NormalTok{empathy,}
+     \AttributeTok{xlab =} \StringTok{"Identification"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Empathy"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Identification vs Empathy (GTA)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PS12-Dilip_files/figure-latex/unnamed-chunk-32-1.pdf}
+Correlation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate correlation coefficient}
+\NormalTok{corr\_GTA }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(GTA}\SpecialCharTok{$}\NormalTok{identify, GTA}\SpecialCharTok{$}\NormalTok{empathy)}
+\NormalTok{corr\_GTA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.2722745
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calculate the p{-}value}
+\NormalTok{cor\_test\_GTA }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(GTA}\SpecialCharTok{$}\NormalTok{identify, GTA}\SpecialCharTok{$}\NormalTok{empathy, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\NormalTok{p\_value\_GTA }\OtherTok{\textless{}{-}}\NormalTok{ cor\_test\_GTA}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{p\_value\_GTA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06118009
+\end{verbatim}
+
+Adjusting the p-values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#  adjust for multiple testing using bonferroni method}
+\NormalTok{p\_values }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(p\_value\_neutral, p\_value\_HalfLife, p\_value\_GTA)}
+\NormalTok{p\_value\_adjust }\OtherTok{\textless{}{-}} \FunctionTok{p.adjust}\NormalTok{(p\_values, }\AttributeTok{method =} \StringTok{"bonferroni"}\NormalTok{)}
+\NormalTok{p\_value\_adjust}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.0000000 1.0000000 0.1835403
+\end{verbatim}
+
+Well, with the adjusted p-values using bonferroni method, we can clearly
+see that these are not tiny. With the assumed significance level of
+0.05/3, we can say the data is consistent with the null hypotheses that
+there is no significant difference between identity and empathy among
+students that play gta, halflife or neutral games. Are we 100\% sure?
+The sample size we have is about 50 for each class which in my opinion
+is too less to draw conclusion on the population. But perhaps, with more
+data we could be 100\% sure.
+
+\end{document}

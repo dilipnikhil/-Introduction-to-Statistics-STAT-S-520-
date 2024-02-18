@@ -1,0 +1,247 @@
+---
+title: "ProblemSet7"
+author: "Dilip Nikhil Francies"
+date: "2023-10-19"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Question 2: (5 points. From the Spring 2017 final.) I downloaded data on the number of citations for a random sample of 1000 journal articles published in 1981. (The data is from the ISI Citation Indexes.) I ran some analysis on the data in R, and produced the following output
+
+### Answer :
+
+#### 2a: Is the distribution of the number of citations (i) exactly normal, (ii) approximately normal, or (iii) not close to normal? How do you know?
+
+We know that for a normal distribution, IQR is given by 1.349 \* Standard deviation
+
+Given: variance of the distribution = 565.2476. Lets calculate standard deviation:
+
+```{r}
+sd = sqrt(565.2476)
+sd
+
+IQR = 1.349 * sd
+IQR
+```
+
+From the given information, we have IQR = Q3- Q1 = 7.25 - 0.00 = 7.25.
+
+Secondly, for a normal distribution, the mean and median is equal or close to each other. From the given data, we have mean = 9.06, and median 1.00. As mean is more than median, the distribution would be positively skewed.
+
+Hence the IQR values, 32.07239 and 7.25 are not even relatively close to each other, and mean of the distribution is more than the median. Hence the distribution is not normal.
+
+#### Question 2b: Find an approximate 95% confidence interval for the mean number of citations
+
+Given : mean = 9.06, variance = 565.2476 Lets calculate standard deviation and standard error:
+
+```{r}
+mean <- 9.06
+sd <- sqrt(565.2476)
+se <- sd/sqrt(1000)          # n = 1000, given
+```
+
+For 95% confidence interval, alpha = 0.05, alpha/2 = 0.025.
+
+```{r}
+upperbound <- mean + qnorm(0.975,0,1) * se
+lowerbound <- mean - qnorm(0.975,0,1) * se
+
+print(paste("The approximate 95% confidence interval for the mean number of citations is" ,upperbound ,"and" ,lowerbound))
+```
+
+#### 2c: Find an approximate 95% confidence interval for the proportion of journal articles with no citations.
+
+Given: Proportion of articles with no citations = 460 out of 1000 citations. This can be considered as Bernoulli trials where a journal either has a citation or not. hence, p = 0.46. For a 1000 trials, we can estimate sample mean xbar to be good estimate of p. hence, standard deviation of the sample is give by (sqrt(xbar\*(1-xbar)))
+
+```{r}
+xbar <- 0.46
+n <- 1000                                     # given
+sd <- sqrt(xbar*(1-xbar)) 
+se <- sd/sqrt(n)
+print(paste("hence, the plug in estimate of standard deviation is" ,sd ,"and the standard error is" ,se))
+```
+
+```{r}
+upperbound <- xbar + qnorm(0.975) * se
+lowerbound <- xbar- qnorm(0.975) * se
+
+print(paste("Therfore, for 95% confidence interval of journal with no citation is",lowerbound , "and" ,upperbound))
+```
+
+#### Question 3:
+
+##### 3a : Plot the distributions of the raw feeling thermometer scores for Trump, Clinton, and Sanders on the same scale. What's wrong with the data?
+
+#Lets read the data first:
+
+```{r}
+data <- read.table("ANES2016.txt",header = TRUE)
+nrow(data)
+```
+
+Distribution of the entire data:
+
+```{r}
+library(ggplot2)
+ggplot(data, aes(x = Thermometer)) +geom_histogram()
+```
+
+Distribution of Trump:
+
+```{r}
+trump <- subset(data,Candidate == "Trump")
+nrow(trump)
+ggplot(trump, aes(x = Thermometer)) +geom_histogram()
+```
+
+Distribution of Clinton:
+
+```{r}
+clinton <- subset(data,Candidate == "Clinton")
+ggplot(clinton, aes(x = Thermometer)) +geom_histogram()
+```
+
+Distribution of Sanders:
+
+```{r}
+sanders <- subset(data,Candidate == "Sanders")
+ggplot(sanders, aes(x = Thermometer)) +geom_histogram()
+```
+
+What's wrong with the data? Answer : One can clearly see that there are outliers present in the data for all three people. When the majority of the data lies within 0-125, there are values that go beyond 990.
+
+#### 3b :
+
+```{r}
+therm100 <- subset(data,Thermometer <=100)
+
+trump <- subset(therm100,Candidate == "Trump")
+meanTrump <- mean(trump$Thermometer)
+sdTrump = sd(trump$Thermometer)
+
+clinton <- subset(therm100,Candidate == "Clinton")
+meanClint <- mean(clinton$Thermometer)
+sdClint <- sd(clinton$Thermometer)
+
+sanders <- subset(therm100,Candidate == "Sanders")
+meanSander <- mean(sanders$Thermometer)
+sdSanders <- sd(sanders$Thermometer)
+
+print(paste("Trump : Standard deviation is",sdTrump,"and mean is", meanTrump ))
+print(paste("Clinton : Standard deviation is",sdClint,"and mean is", meanClint ))
+print(paste("Sanders : Standard deviation is",sdSanders,"and mean is", meanSander ))
+```
+
+#### Question 3c:
+
+i.  Trump
+
+```{r}
+nrow(trump)
+```
+
+```{r}
+seTrump <- sd(trump$Thermometer)/sqrt(1197)
+upperbound <- meanTrump + qnorm(0.995) * seTrump            #99% confidence interval
+lowerbound <- meanTrump - qnorm(0.995) * seTrump
+print(paste("Therfore, for 99% confidence interval of Trumps mean feeling thermometer of",meanTrump," is", upperbound, "and", lowerbound))
+```
+
+ii. Clinton
+
+```{r}
+nrow(clinton)
+```
+
+```{r}
+seClint <- sd(clinton$Thermometer)/sqrt(1199)
+upperbound <- meanClint + qnorm(0.995) * seClint            #99% confidence interval
+lowerbound <- meanClint - qnorm(0.995) * seClint
+print(paste("Therfore, for 99% confidence interval of Clinton mean feeling thermometer of",meanClint," is", upperbound, "and", lowerbound))
+```
+
+iii. Sander:
+
+```{r}
+nrow(sanders)
+```
+
+```{r}
+seSanders <- sd(sanders$Thermometer)/sqrt(1192)
+upperbound <- meanSander + qnorm(0.995) * seSanders            #99% confidence interval
+lowerbound <- meanSander - qnorm(0.995) * seSanders
+print(paste("Therfore, for 99% confidence interval of Sanders mean feeling thermometer of",meanSander," is", upperbound, "and", lowerbound))
+```
+
+#### Question 5:In a May 2019 Gallup poll,1 63% of a sample of 1009 U.S. adults supported same-sex marriage.
+
+(a) Treating the data as a simple random sample, find a 95% confidence interval for the percentage of all U.S. adults who support same-sex marriage.
+
+Answer: We can consider this as Bernoulli trial where every individual either supports or does not support same-sex marriage. Hence, p is given by 0.63 and sample size n = 1009. For a Bernoulli random variable, it is sage to assume p as the expected value, ie xbar = 0.63.
+
+```{r}
+xbar <- 0.63
+sd <- sqrt(xbar *(1-xbar))
+se <- sd / sqrt(1009)
+se
+```
+
+```{r}
+upperbound <- xbar + qnorm(0.975) * se
+lowerbound <- xbar - qnorm(0.975) * se
+print(paste("Hence, 95% confidence interval for the percentage of all US adults who supports same sex marriage is",upperbound,"and",lowerbound))
+```
+
+#### 5b) Suppose we wanted to have a 95% confidence interval for the percentage of all U.S. adults who support same-sex marriage with total length 2% (i.e. 0.02.) How large a simple random sample would we need?
+
+Answer: we know that, Length "L" is given by (2 \* q \*sd / sqrt(n)) Which give us:
+
+```{r}
+qnorm(0.975)
+```
+
+```{r}
+#plugging in the values for the above equation we get
+
+n = ((2*1.9599 * xbar*(1-xbar)) /0.02)^2
+n = 38416*(xbar*(1-xbar))
+
+#Option 1:
+  #Lets consider xbar = 0.63
+n1 = 38416*(0.63*(1-0.63))
+print(paste("When xbar is 0.63, the sample size required is", n1))
+```
+
+#### Question 4. Mt. Wrightson, the fifth highest summit in Arizona and the highest in Pima County, has a reputed elevation of 9453 feet. To amuse its members, the Southern Arizona Hiking Club (SAHC) decides to construct its own confidence interval for μ, the true elevation of Mt. Wrightson's summit. SAHC acquires an altimeter whose measurements will have an expected value of μ with a standard deviation of 6 feet. How many measurements should SAHC plan to take if it wants to construct a 0.99-level confidence interval for μ that has a length of 2 feet?
+
+### Answer:
+
+We know that n is given by (2qSD/L) \^2 - {Trosset page 226}
+
+Given : standard deviation= 6
+
+The desired interval length is given by 2 feet. The corresponding q value for 99% interval is given by
+
+```{r}
+qnorm(0.995)
+```
+
+Therefore, plugging in the values we get:
+
+```{r}
+n = (2* qnorm(0.995) * 6 /2)^2
+n
+```
+
+Hence, approximately 239 measurements are required if SAHC plan to construct a 0.99-level confidence interval for μ that has a length of 2 feet.
+
+##### Question 1e Code:
+
+```{r}
+1-pnorm(0.5,0,0.4025)
+```
